@@ -1,0 +1,39 @@
+void main ( void )
+{
+	uint8_t ByteOfData ;
+
+	ByteOfData = 0 x55 ;
+	eeprom_update_byte (( uint8_t *) 64, ByteOfData );
+}
+void main ( void )
+{
+	uint8_t value;
+	value = eeprom_read_byte ((const uint8_t*)64);	/* Read value from 
+							64 address */
+}
+void main ( void )
+{
+	float floatvalue;
+
+	floatvalue = 22.52 ;
+	eeprom_write_float (( float *) 20, floatvalue);
+}
+void main ( void )
+{
+float floatvalue;
+
+floatvalue =eeprom_read_float(( float *) 20);
+}
+int main()
+{
+	char R_array[15],W_array[15] = "EEPROM TEST";
+	LCD_Init();
+	memset(R_array,0,15);
+	eeprom_busy_wait();		/* Initialize LCD */
+	eeprom_write_block(W_array,0,strlen(W_array));	/* Write W_array 
+							from EEPROM address 0 */
+	eeprom_read_block(R_array,0,strlen(W_array));	/* Read EEPROM 
+							from address 0 */
+	LCD_String(R_array);		/* Print Read_array on LCD */
+	return(0);
+}
